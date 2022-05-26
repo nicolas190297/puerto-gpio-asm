@@ -22,8 +22,8 @@
 
 defun Pin_init
     // R0: self, R1: puerto, R2: numPin
-    str R1,[R0,#Pin__puerto]
-    str R2,[R0,#Pin__numero]
+    str R1,[R0,#Pin__puerto] //guardo R1 en la estructura R0 con el offset
+    str R2,[R0,#Pin__numero] 
     bx lr
 endfun Pin_init
 
@@ -33,10 +33,21 @@ endfun Pin_init
 .set ODR,0x0C
 .set BSRR,0x10
 .set BRR,0x14
+.set MASCARA_BITS_CONFIG, 0xF
 
 defun Pin_configura
     // R0: self, R1: config
-    bx lr
+    push {R4,R5,LR}
+    ldr R2,[R0,#Pin__puerto] 
+    ldr R3,[R0,#Pin__numero] //R3 es el valor guardado en la direccion de memoria
+    ldr R4,[R2,#CRL]
+    movs R5,#MASCARA_BITS_CONFIG //cargo en R5 la mascara con 1
+    lsls R3,#2 //moverlo 2 a la izquierda q es multiplicarlo por 4 
+    lsls R5,R3
+    bics R5,#MASCARA_BITS_CONFIG
+
+    pop{R4,PC}
+
 endfun Pin_configura
 
 
