@@ -102,13 +102,13 @@ int main(void)
     UNITY_BEGIN();
     RUN_TEST(configura_analogico);
     RUN_TEST(configura_entrada);
-   // RUN_TEST(configura_salida);
-   // RUN_TEST(configura_salida_od);
-   // RUN_TEST(escribe_en_salida_bajo);
-   // RUN_TEST(escribe_en_salida_alto);
-   // RUN_TEST(configura_entrada_pullUp);
-   // RUN_TEST(configura_entrada_pullDown);
-   // RUN_TEST(lee_entrada);
-   // RUN_TEST(lee_valor_salida);
+    RUN_TEST(configura_salida);
+    RUN_TEST(configura_salida_od);
+    RUN_TEST(escribe_en_salida_bajo);
+    RUN_TEST(escribe_en_salida_alto);
+    RUN_TEST(configura_entrada_pullUp);
+    RUN_TEST(configura_entrada_pullDown);
+    RUN_TEST(lee_entrada);
+    RUN_TEST(lee_valor_salida);
     return UNITY_END();   
 }
